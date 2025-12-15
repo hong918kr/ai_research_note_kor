@@ -4,11 +4,11 @@
 Lua Mastery Guide for Embedded Engineers - 20-Step Practice
 ================================================================================
 How to run:
-  lua lua_practice.lua
+  lua lua_lang_prac1_e_new.lua
 
 Or after granting execution permission:
-  chmod +x lua_practice.lua
-  ./lua_practice.lua
+  chmod +x lua_lang_prac1_e_new.lua
+  ./lua_lang_prac1_e_new.lua
 ================================================================================
 ]]
 
@@ -27,17 +27,18 @@ end
 
 --[[
 Step 1: Hello & Comments
-Problem: Use the print function and write comments (--,--[[ ]]).
+Problem: Use the print function and write comments (single line: --, multi-line: --[=[ ]=])
 ]]
+
 print_section(1, "Hello & Comments")
 
-function step1_hello_and_comments()
+local function step1_hello_and_comments()
     -- This is a single-line comment
     print("Hello, Lua!")
     
     --[[
         This is a multi-line comment.
-        In Lua, you can comment multiple lines with --[[ ]]
+        In Lua, you can comment multiple lines like this.
     ]]
     
     print("Comment test completed")
@@ -55,7 +56,7 @@ Note: Lua defaults to global. Using 'local' is an important habit.
 ]]
 print_section(2, "Variables & Scope")
 
-function step2_variables_and_scope()
+local function step2_variables_and_scope()
     global_var = "I am a global variable"  -- No local keyword = global
     
     do
@@ -84,7 +85,7 @@ and verify the 8 basic types using type() function.
 ]]
 print_section(3, "Types & Nil")
 
-function step3_types_and_nil()
+local function step3_types_and_nil()
     local examples = {
         ["nil"] = nil,
         ["boolean"] = true,
@@ -118,7 +119,7 @@ Note: In Lua, 0 is treated as true. Write code to verify this.
 ]]
 print_section(4, "Conditionals")
 
-function step4_conditionals(n)
+local function step4_conditionals(n)
     if n % 2 == 0 then
         print(n .. " is even")
     else
@@ -126,7 +127,7 @@ function step4_conditionals(n)
     end
 end
 
-function step4_zero_truthiness_test()
+local function step4_zero_truthiness_test()
     print("\nLua truthiness test (0 is true!):")
     
     if 0 then
@@ -154,7 +155,7 @@ Problem: Print numbers from 1 to 10 using while, repeat...until, and numeric for
 ]]
 print_section(5, "Loops")
 
-function step5_loops()
+local function step5_loops()
     print("while loop:")
     local i = 1
     while i <= 10 do
@@ -198,7 +199,7 @@ Important: Verify that indexing starts from 1.
 ]]
 print_section(6, "Array")
 
-function step6_array()
+local function step6_array()
     local arr = {"a", "b", "c", "d", "e"}
     
     print("Array elements:")
@@ -229,7 +230,7 @@ Verify that t.key and t["key"] are identical.
 ]]
 print_section(7, "Dictionary")
 
-function step7_dictionary()
+local function step7_dictionary()
     local person = {
         name = "John Doe",
         age = 30,
@@ -261,7 +262,7 @@ Observe how ipairs stops when encountering nil in the middle of an array.
 ]]
 print_section(8, "Iterators")
 
-function step8_iterators()
+local function step8_iterators()
     local mixed = {10, 20, 30, nil, 50, key="value"}
     
     print("ipairs() - Iterates array indices only (stops at nil):")
@@ -288,14 +289,14 @@ and assign them to multiple variables. (Similar to Python's tuple unpacking)
 ]]
 print_section(9, "Functions - Multiple Return Values")
 
-function step9_multiple_returns(x, y)
+local function step9_multiple_returns(x, y)
     local sum = x + y
     local product = x * y
     local quotient = x / y
     return sum, product, quotient
 end
 
-function step9_demo()
+local function step9_demo()
     -- Receive multiple values simultaneously
     local s, p, q = step9_multiple_returns(10, 2)
     
@@ -323,7 +324,7 @@ Lua uses its own lightweight pattern syntax instead of Regex.
 ]]
 print_section(10, "String Manipulation")
 
-function step10_string_manipulation()
+local function step10_string_manipulation()
     local text = "Lua is powerful even in 2024!"
     
     -- String replacement
@@ -371,7 +372,7 @@ Problem: Define the __add metamethod to allow combining two tables with the (+) 
 ]]
 print_section(11, "Metatables Basic - Operator Overloading")
 
-function step11_metatables_basic()
+local function step11_metatables_basic()
     local Vector = {}
     local mt = {
         __add = function(a, b)
@@ -407,7 +408,7 @@ it searches in table B. (Basic inheritance)
 ]]
 print_section(12, "Prototype OOP - Inheritance")
 
-function step12_prototype_oop()
+local function step12_prototype_oop()
     -- Parent table (prototype)
     local Animal = {
         sound = "???",
@@ -442,7 +443,7 @@ where instances are created using the :new() method.
 ]]
 print_section(13, "Class Implementation")
 
-function step13_class_implementation()
+local function step13_class_implementation()
     -- Class definition
     local Account = {balance = 0}
     
@@ -494,7 +495,7 @@ obj.func(obj, args) and obj:func(args) in method calls.
 ]]
 print_section(14, "Syntactic Sugar - Colon Operator")
 
-function step14_syntactic_sugar()
+local function step14_syntactic_sugar()
     local Person = {}
     
     function Person.new(name)
@@ -533,7 +534,7 @@ Problem: Practice the module system by using require to load tables
 ]]
 print_section(15, "Modules")
 
-function step15_modules()
+local function step15_modules()
     -- Module definition (typically written in separate file)
     local mymath = {}
     
@@ -572,7 +573,7 @@ Problem: Implement cooperative multitasking using coroutine.create, yield, and r
 ]]
 print_section(16, "Coroutines - Cooperative Multitasking")
 
-function step16_coroutines()
+local function step16_coroutines()
     -- Create coroutine
     local co = coroutine.create(function()
         for i = 1, 5 do
@@ -618,7 +619,7 @@ terminating the program when errors occur. (Similar to Python's try-except)
 ]]
 print_section(17, "Error Handling - pcall")
 
-function step17_error_handling()
+local function step17_error_handling()
     local function risky_operation(x)
         if x == 0 then
             error("Cannot divide by zero!")
@@ -666,7 +667,7 @@ for data exchange between Lua and C by drawing diagrams.
 ]]
 print_section(18, "C API - Virtual Stack (Concept)")
 
-function step18_c_api_concept()
+local function step18_c_api_concept()
     print([[
 Lua C API Virtual Stack Concept:
 
@@ -710,9 +711,9 @@ Problem: Write a simple host program in C that loads and executes a Lua script f
 ]]
 print_section(19, "C Extension (Practice Guide)")
 
-function step19_c_extension_guide()
+local function step19_c_extension_guide()
     print([[
-Embedding Lua in C (MacOS):
+Embedding Lua in C (Ubuntu):
 
 1. Create config.lua:
    width = 1920
@@ -738,7 +739,7 @@ Embedding Lua in C (MacOS):
    }
 
 3. Compile:
-   clang -o embed main.c -I/opt/homebrew/include -L/opt/homebrew/lib -llua
+   gcc -o embed main.c -I/usr/include/lua5.4 -llua5.4
 
 4. Run:
    ./embed
@@ -764,7 +765,7 @@ Problem: Use the Python lupa library to execute Lua code within Python.
 ]]
 print_section(20, "Python Binding (Practice Guide)")
 
-function step20_python_binding_guide()
+local function step20_python_binding_guide()
     print([[
 Using Lua in Python:
 
@@ -811,7 +812,7 @@ Advantages:
     -- Simulate Python binding from Lua side
     print("\n\nLua side example (function to be called from Python):")
     
-    function calculate_stats(data)
+    local function calculate_stats(data)
         local sum = 0
         local count = 0
         for _, v in ipairs(data) do
